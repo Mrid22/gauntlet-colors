@@ -1,19 +1,14 @@
-import { ReactElement } from 'react';
-import { Detail } from "@project-gauntlet/api/components";
-import { Environment } from "@project-gauntlet/api/helpers";
+import { ReactElement } from "react";
+import { List} from "@project-gauntlet/api/components";
+import { Environment, Clipboard, showHud } from "@project-gauntlet/api/helpers";
+import convert from 'color-convert';
 
 export default function TemplateView(): ReactElement {
-    return (
-        <Detail>
-            <Detail.Content>
-                <Detail.Content.Paragraph>
-                    Hello Gauntlet!
-                </Detail.Content.Paragraph>
-                <Detail.Content.Paragraph>
-                    Gauntlet Version: {Environment.gauntletVersion}
-                </Detail.Content.Paragraph>
-            </Detail.Content>
-        </Detail>
+  return (
+    <List>
+      <List.SearchBar/>
+      <List.Item subtitle = {"hsl"} title = {"convert.rgb.hsl(255,255,255)"} id = {"hsl"}></List.Item>
+      <List.Item subtitle = {"name"} title = {convert.rgb.keyword(255,255,255).toString()} id = {"name"}></List.Item>
+    </List>
     );
-};
-
+}

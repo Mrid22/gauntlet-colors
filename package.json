@@ -6,7 +6,9 @@
     "dev": "gauntlet dev"
   },
   "dependencies": {
-    "@project-gauntlet/api": "0.14.0"
+    "@project-gauntlet/api": "0.14.0",
+    "color": "^5.0.0",
+    "color-convert": "^3.0.1"
   },
   "devDependencies": {
     "@project-gauntlet/tools": "0.10.0",

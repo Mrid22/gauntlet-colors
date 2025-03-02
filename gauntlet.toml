@@ -1,12 +1,12 @@
 [gauntlet]
-name = 'Template Plugin'
+name = 'Color Converter'
 description = """
 Template Plugin Description
 """
 
 [[entrypoint]]
 id = 'template-view'
-name = 'Template view'
+name = 'Color Converter'
 path = 'src/template-view.tsx'
 type = 'view'
 description = """

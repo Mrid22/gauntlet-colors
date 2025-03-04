@@ -30,26 +30,28 @@ export default function TemplateView(): ReactElement {
       <List.SearchBar
         placeholder={"Search a color in any format you want"}
         value={searchText}
-        onChange={(searchText)=>{
-          if(searchText){
-            if(!parseInt(searchText)){
+        onChange={(searchText) => {
+          if (searchText) {
+            if (!parseInt(searchText)) {
               return (
-                <List.Item
-                subtitle={"hsl"}
-                title={convert.rgb.hsl(255, 255, 255).toString()}
-                id={"hsl"}
-              >
-              </List.Item>
+                <>
+                  <List.Item
+                    subtitle={"hsl"}
+                    title={convert.rgb.hsl(255, 255, 255).toString()}
+                    id={"hsl"}
+                  >
+                  </List.Item>
+                  <List.Item
+                    subtitle={"name"}
+                    title={convert.rgb.keyword(255, 255, 255).toString()}
+                    id={"name"}>
+                  </List.Item>
+                </>
               )
             }
           }
         }}
-         />
-      <List.Item
-        subtitle={"name"}
-        title={convert.rgb.keyword(255, 255, 255).toString()}
-        id={"name"}>
-      </List.Item>
+      />
     </List>
   );
 }

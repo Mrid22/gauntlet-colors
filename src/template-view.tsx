@@ -32,7 +32,7 @@ export default function TemplateView(): ReactElement {
         value={searchText}
         onChange={(searchText) => {
           if (searchText) {
-            if (!parseInt(searchText)) {
+            if (RegExp(/^[a-z]+$/gi).test(searchText)) {
               return (
                 <>
                   <List.Item
@@ -54,6 +54,33 @@ export default function TemplateView(): ReactElement {
                   <List.Item
                     subtitle={"cmyk"}
                     title={convert.keyword.cmyk(searchText).toString()}
+                    id={"cmyk"}
+                  ></List.Item>
+                </>
+              )
+            }
+            else if(searchText.includes("#") && searchText.length == 7){
+              return(
+                <>
+                <List.Item
+                    subtitle={"name"}
+                    title={convert.hex.keyword(searchText).toString()}
+                    id={"rgb"}
+                  >
+                  </List.Item>
+                  <List.Item
+                    subtitle={"rgb"}
+                    title={convert.hex.rgb(searchText).toString()}
+                    id={"hex"}>
+                  </List.Item>
+                  <List.Item
+                    subtitle={"hsl"}
+                    title={convert.hex.hsl(searchText).toString()}
+                    id={"hsl"}
+                  ></List.Item>
+                  <List.Item
+                    subtitle={"cmyk"}
+                    title={convert.hex.cmyk(searchText).toString()}
                     id={"cmyk"}
                   ></List.Item>
                 </>

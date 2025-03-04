@@ -2,9 +2,10 @@ import { ReactElement, useState } from "react";
 import { List, Action, ActionPanel } from "@project-gauntlet/api/components";
 import { Clipboard, showHud } from "@project-gauntlet/api/helpers";
 import convert from "color-convert";
+import chroma from "chroma-js";
 export default function TemplateView(): ReactElement {
   const [searchText, setSearchText] = useState<string | undefined>("");
-  let searchTexthex: string
+  let searchTexthex: string;
   let listitems = null;
   if (searchText) {
     if (!parseInt(searchText)) {
@@ -12,27 +13,27 @@ export default function TemplateView(): ReactElement {
         listitems = (
           <>
             <List.Item
-              id={convert.keyword.rgb(searchText).toString()}
-              title={convert.keyword.rgb(searchText).toString()}
+              id={chroma(searchText).rgb().toString()}
+              title={chroma(searchText).rgb().toString()}
               subtitle={"rgb"}
             ></List.Item>
             <List.Item
-              id={"#" + convert.keyword.hex(searchText).toString()}
-              title={"#" + convert.keyword.hex(searchText).toString()}
+              id={chroma(searchText).hex().toString()}
+              title={chroma(searchText).hex().toString()}
               subtitle={"hex"}
             ></List.Item>
             <List.Item
-              id={convert.keyword.hsl(searchText).toString()}
-              title={convert.keyword.hsl(searchText).toString()}
+              id={chroma(searchText).hsl().toString()}
+              title={chroma(searchText).hsl().toString()}
               subtitle={"hsl"}
             ></List.Item>
             <List.Item
-              id={convert.keyword.cmyk(searchText).toString()}
-              title={convert.keyword.cmyk(searchText).toString()}
+              id={chroma(searchText).cmyk().toString()}
+              title={chroma(searchText).cmyk().toString()}
               subtitle={"cmyk"}
             ></List.Item>
           </>
-        );
+);
       } catch (error) {
         <List.Item
           id={"err"}
@@ -40,10 +41,13 @@ export default function TemplateView(): ReactElement {
           subtitle={"err"}
         ></List.Item>;
       }
-    }
-    else if (searchText.includes("#")) {
-      searchTexthex = searchText.replace("#","0x")
-      console.log(searchTexthex)
+    } else if (searchText.length == 6) {
+      if (searchText.includes("#")) {
+        searchTexthex = searchText.replace("#", "");
+      }
+      else{
+        searchTexthex = searchText
+      }
       try {
         listitems = (
           <>
@@ -75,6 +79,7 @@ export default function TemplateView(): ReactElement {
           title={"Please enter a valid color"}
           subtitle={"err"}
         ></List.Item>;
+        console.log("h")
       }
     }
   }

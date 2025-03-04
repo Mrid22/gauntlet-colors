@@ -7,8 +7,12 @@
   },
   "dependencies": {
     "@project-gauntlet/api": "0.14.0",
+    "@types/chroma-js": "^3.1.1",
+    "chroma-js": "^1.3.4",
     "color": "^5.0.0",
-    "color-convert": "^3.0.1"
+    "color-convert": "^3.0.1",
+    "install": "^0.13.0",
+    "npm": "^11.1.0"
   },
   "devDependencies": {
     "@project-gauntlet/tools": "0.10.0",

@@ -1,25 +1,95 @@
 import { ReactElement, useState } from "react";
 import { List, Action, ActionPanel } from "@project-gauntlet/api/components";
-import {
-  Clipboard,
-  showHud
-} from "@project-gauntlet/api/helpers";
-import convert from 'color-convert';
-const [searchText, setSearchText] = useState<string | undefined>("");
+import { Clipboard, showHud } from "@project-gauntlet/api/helpers";
+import convert from "color-convert";
 export default function TemplateView(): ReactElement {
+  const [searchText, setSearchText] = useState<string | undefined>("");
+  let searchTexthex: string
+  let listitems = null;
+  if (searchText) {
+    if (!parseInt(searchText)) {
+      try {
+        listitems = (
+          <>
+            <List.Item
+              id={convert.keyword.rgb(searchText).toString()}
+              title={convert.keyword.rgb(searchText).toString()}
+              subtitle={"rgb"}
+            ></List.Item>
+            <List.Item
+              id={"#" + convert.keyword.hex(searchText).toString()}
+              title={"#" + convert.keyword.hex(searchText).toString()}
+              subtitle={"hex"}
+            ></List.Item>
+            <List.Item
+              id={convert.keyword.hsl(searchText).toString()}
+              title={convert.keyword.hsl(searchText).toString()}
+              subtitle={"hsl"}
+            ></List.Item>
+            <List.Item
+              id={convert.keyword.cmyk(searchText).toString()}
+              title={convert.keyword.cmyk(searchText).toString()}
+              subtitle={"cmyk"}
+            ></List.Item>
+          </>
+        );
+      } catch (error) {
+        <List.Item
+          id={"err"}
+          title={"Please enter a valid color"}
+          subtitle={"err"}
+        ></List.Item>;
+      }
+    }
+    else if (searchText.includes("#")) {
+      searchTexthex = searchText.replace("#","0x")
+      console.log(searchTexthex)
+      try {
+        listitems = (
+          <>
+            <List.Item
+              id={convert.hex.keyword(searchTexthex).toString()}
+              title={convert.hex.keyword(searchTexthex).toString()}
+              subtitle={"name"}
+            ></List.Item>
+            <List.Item
+              id={"#" + convert.hex.rgb(searchTexthex).toString()}
+              title={"#" + convert.hex.rgb(searchTexthex).toString()}
+              subtitle={"rgb"}
+            ></List.Item>
+            <List.Item
+              id={convert.hex.hsl(searchTexthex).toString()}
+              title={convert.hex.hsl(searchTexthex).toString()}
+              subtitle={"hsl"}
+            ></List.Item>
+            <List.Item
+              id={convert.hex.cmyk(searchTexthex).toString()}
+              title={convert.hex.cmyk(searchTexthex).toString()}
+              subtitle={"cmyk"}
+            ></List.Item>
+          </>
+        );
+      } catch (error) {
+        <List.Item
+          id={"err"}
+          title={"Please enter a valid color"}
+          subtitle={"err"}
+        ></List.Item>;
+      }
+    }
+  }
   return (
     <List
       actions={
         <ActionPanel>
           <Action
             label={`Copy color to clipboard`}
-            onAction={async (title: string | undefined) => {
-              console.log(title);
-              if (typeof title === "string") {
-                await Clipboard.writeText(title);
-                showHud(`"${title}" copied to clipboard`);
-              }
-              else {
+            onAction={async (id: string | undefined) => {
+              console.log(id);
+              if (typeof id === "string") {
+                await Clipboard.writeText(id);
+                showHud(`"${id}" copied to clipboard`);
+              } else {
                 showHud(`please select text to copy`);
               }
             }}
@@ -30,67 +100,9 @@ export default function TemplateView(): ReactElement {
       <List.SearchBar
         placeholder={"Search a color in any format you want"}
         value={searchText}
-        onChange={(searchText) => {
-          if (searchText) {
-            //checking keyword
-            if (RegExp(/^[a-z]+$/gi).test(searchText)) {
-              return (
-                <>
-                  <List.Item
-                    subtitle={"rgb"}
-                    title={convert.keyword.rgb(searchText).toString()}
-                    id={"rgb"}
-                  >
-                  </List.Item>
-                  <List.Item
-                    subtitle={"hex"}
-                    title={convert.keyword.hex(searchText).toString()}
-                    id={"hex"}>
-                  </List.Item>
-                  <List.Item
-                    subtitle={"hsl"}
-                    title={convert.keyword.hsl(searchText).toString()}
-                    id={"hsl"}
-                  ></List.Item>
-                  <List.Item
-                    subtitle={"cmyk"}
-                    title={convert.keyword.cmyk(searchText).toString()}
-                    id={"cmyk"}
-                  ></List.Item>
-                </>
-              )
-            }
-            //checking hexcode
-            else if(searchText.includes("#") && searchText.length == 7){
-              return(
-                <>
-                <List.Item
-                    subtitle={"name"}
-                    title={convert.hex.keyword(searchText).toString()}
-                    id={"rgb"}
-                  >
-                  </List.Item>
-                  <List.Item
-                    subtitle={"rgb"}
-                    title={convert.hex.rgb(searchText).toString()}
-                    id={"hex"}>
-                  </List.Item>
-                  <List.Item
-                    subtitle={"hsl"}
-                    title={convert.hex.hsl(searchText).toString()}
-                    id={"hsl"}
-                  ></List.Item>
-                  <List.Item
-                    subtitle={"cmyk"}
-                    title={convert.hex.cmyk(searchText).toString()}
-                    id={"cmyk"}
-                  ></List.Item>
-                </>
-              )
-            }
-          }
-        }}
+        onChange={setSearchText}
       />
+      {listitems}
     </List>
   );
 }

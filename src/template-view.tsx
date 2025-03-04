@@ -34,18 +34,17 @@ export default function TemplateView(): ReactElement {
           if(searchText){
             if(!parseInt(searchText)){
               return (
-                
+                <List.Item
+                subtitle={"hsl"}
+                title={convert.rgb.hsl(255, 255, 255).toString()}
+                id={"hsl"}
+              >
+              </List.Item>
               )
             }
           }
         }}
          />
-      <List.Item
-        subtitle={"hsl"}
-        title={convert.rgb.hsl(255, 255, 255).toString()}
-        id={"hsl"}
-      >
-      </List.Item>
       <List.Item
         subtitle={"name"}
         title={convert.rgb.keyword(255, 255, 255).toString()}

@@ -1,10 +1,11 @@
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { List, Action, ActionPanel } from "@project-gauntlet/api/components";
 import {
   Clipboard,
   showHud
 } from "@project-gauntlet/api/helpers";
 import convert from 'color-convert';
+const [searchText, setSearchText] = useState<string | undefined>("");
 export default function TemplateView(): ReactElement {
   return (
     <List
@@ -26,7 +27,19 @@ export default function TemplateView(): ReactElement {
         </ActionPanel>
       }
     >
-      <List.SearchBar />
+      <List.SearchBar
+        placeholder={"Search a color in any format you want"}
+        value={searchText}
+        onChange={(searchText)=>{
+          if(searchText){
+            if(!parseInt(searchText)){
+              return (
+                
+              )
+            }
+          }
+        }}
+         />
       <List.Item
         subtitle={"hsl"}
         title={convert.rgb.hsl(255, 255, 255).toString()}

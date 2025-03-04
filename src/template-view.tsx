@@ -32,6 +32,7 @@ export default function TemplateView(): ReactElement {
         value={searchText}
         onChange={(searchText) => {
           if (searchText) {
+            //checking keyword
             if (RegExp(/^[a-z]+$/gi).test(searchText)) {
               return (
                 <>
@@ -59,6 +60,7 @@ export default function TemplateView(): ReactElement {
                 </>
               )
             }
+            //checking hexcode
             else if(searchText.includes("#") && searchText.length == 7){
               return(
                 <>

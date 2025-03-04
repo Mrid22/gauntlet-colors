@@ -36,14 +36,14 @@ export default function TemplateView(): ReactElement {
               return (
                 <>
                   <List.Item
-                    subtitle={"hsl"}
-                    title={convert.rgb.hsl(255, 255, 255).toString()}
-                    id={"hsl"}
+                    subtitle={"rgb"}
+                    title={convert.keyword.rgb(searchText).toString()}
+                    id={"rgb"}
                   >
                   </List.Item>
                   <List.Item
-                    subtitle={"name"}
-                    title={convert.rgb.keyword(255, 255, 255).toString()}
+                    subtitle={"hex"}
+                    title={convert.keyword.hex(searchText).toString()}
                     id={"name"}>
                   </List.Item>
                 </>

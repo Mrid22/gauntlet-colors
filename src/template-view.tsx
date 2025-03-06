@@ -12,7 +12,7 @@ export default function TemplateView(): ReactElement {
     let listItemName = <List.Item id={colord(searchText).toName({ closest: true }) ?? "no name available"} title={colord(searchText).toName({ closest: true }) ?? "no name available"} subtitle={"name"}></List.Item>
     let listItemHex = <List.Item id={colord(searchText).toHex()} title={colord(searchText).toHex()} subtitle={"hex"}></List.Item>
     let listItemRgb = <List.Item id={colord(searchText).toRgbString()} title={colord(searchText).toRgbString()} subtitle={"rgb"}></List.Item>
-    let listItemHsl = <List.Item id={colord(searchText).toHslString()}title={colord(searchText).toHslString()} subtitle={"hsl"}></List.Item>
+    let listItemHsl = <List.Item id={colord(searchText).toHslString()} title={colord(searchText).toHslString()} subtitle={"hsl"}></List.Item>
     let listItemCmyk = <List.Item id={colord(searchText).toCmykString()} title={colord(searchText).toCmykString()} subtitle={"cmyk"}></List.Item>
     let listItemErr = <List.Item id={"err"} title={"Please enter a valid color"} subtitle={"err"}></List.Item>;
     if (getFormat(searchText) == "name") {
@@ -26,7 +26,7 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        {listItemErr}
+        { listItemErr }
       }
     }
     else if (getFormat(searchText) == "hex") {
@@ -40,7 +40,7 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        {listItemErr}
+        { listItemErr }
       }
     }
     else if (getFormat(searchText) == "rgb") {
@@ -54,7 +54,7 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        {listItemErr}
+        { listItemErr }
       }
     } else if (getFormat(searchText) == "hsl") {
       try {
@@ -67,7 +67,7 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        {listItemErr}
+        { listItemErr }
       }
     }
   }

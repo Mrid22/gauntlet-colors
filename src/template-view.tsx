@@ -7,75 +7,67 @@ import namesPlugin from "colord/plugins/names"
 extend([cmykPlugin, namesPlugin]);
 export default function TemplateView(): ReactElement {
   const [searchText, setSearchText] = useState<string | undefined>("");
-  let searchTexthex: string;
   let listitems = null;
   if (searchText) {
+    let listItemName = <List.Item id={colord(searchText).toName({ closest: true }) ?? "no name available"} title={colord(searchText).toName({ closest: true }) ?? "no name available"} subtitle={"name"}></List.Item>
+    let listItemHex = <List.Item id={colord(searchText).toHex()} title={colord(searchText).toHex()} subtitle={"hex"}></List.Item>
+    let listItemRgb = <List.Item id={colord(searchText).toRgbString()} title={colord(searchText).toRgbString()} subtitle={"rgb"}></List.Item>
+    let listItemHsl = <List.Item id={colord(searchText).toHslString()}title={colord(searchText).toHslString()} subtitle={"hsl"}></List.Item>
+    let listItemCmyk = <List.Item id={colord(searchText).toCmykString()} title={colord(searchText).toCmykString()} subtitle={"cmyk"}></List.Item>
+    let listItemErr = <List.Item id={"err"} title={"Please enter a valid color"} subtitle={"err"}></List.Item>;
     if (getFormat(searchText) == "name") {
       try {
         listitems = (
           <>
-            <List.Item
-              id={colord(searchText).toRgbString()}
-              title={colord(searchText).toRgbString()}
-              subtitle={"rgb"}
-            ></List.Item>
-            <List.Item
-              id={colord(searchText).toHex()}
-              title={colord(searchText).toHex()}
-              subtitle={"hex"}
-            ></List.Item>
-            <List.Item
-              id={colord(searchText).toHslString()}
-              title={colord(searchText).toHslString()}
-              subtitle={"hsl"}
-            ></List.Item>
-            <List.Item
-              id={colord(searchText).toCmykString()}
-              title={colord(searchText).toCmykString()}
-              subtitle={"cmyk"}
-            ></List.Item>
+            {listItemHex}
+            {listItemRgb}
+            {listItemHsl}
+            {listItemCmyk}
           </>
         );
       } catch (error) {
-        <List.Item
-          id={"err"}
-          title={"Please enter a valid color"}
-          subtitle={"err"}
-        ></List.Item>;
+        {listItemErr}
       }
     }
-    else if(getFormat(searchText) == "hex"){
+    else if (getFormat(searchText) == "hex") {
       try {
         listitems = (
           <>
-            <List.Item
-              id={colord(searchText).toName({closest: true}) ?? "no name available"}
-              title={colord(searchText).toName({ closest: true }) ?? "no name available"}
-              subtitle={"rgb"}
-            ></List.Item>
-            <List.Item
-              id={colord(searchText).toRgbString()}
-              title={colord(searchText).toRgbString()}
-              subtitle={"hex"}
-            ></List.Item>
-            <List.Item
-              id={colord(searchText).toHslString()}
-              title={colord(searchText).toHslString()}
-              subtitle={"hsl"}
-            ></List.Item>
-            <List.Item
-              id={colord(searchText).toCmykString()}
-              title={colord(searchText).toCmykString()}
-              subtitle={"cmyk"}
-            ></List.Item>
+            {listItemName}
+            {listItemRgb}
+            {listItemHsl}
+            {listItemCmyk}
           </>
         );
       } catch (error) {
-        <List.Item
-          id={"err"}
-          title={"Please enter a valid color"}
-          subtitle={"err"}
-        ></List.Item>;
+        {listItemErr}
+      }
+    }
+    else if (getFormat(searchText) == "rgb") {
+      try {
+        listitems = (
+          <>
+            {listItemName}
+            {listItemHex}
+            {listItemHsl}
+            {listItemCmyk}
+          </>
+        );
+      } catch (error) {
+        {listItemErr}
+      }
+    } else if (getFormat(searchText) == "hsl") {
+      try {
+        listitems = (
+          <>
+            {listItemName}
+            {listItemHex}
+            {listItemRgb}
+            {listItemCmyk}
+          </>
+        );
+      } catch (error) {
+        {listItemErr}
       }
     }
   }

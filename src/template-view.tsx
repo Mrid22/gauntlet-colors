@@ -3,7 +3,8 @@ import { List, Action, ActionPanel } from "@project-gauntlet/api/components";
 import { Clipboard, showHud } from "@project-gauntlet/api/helpers";
 import { colord, getFormat, extend } from "colord";
 import cmykPlugin from "colord/plugins/cmyk";
-extend([cmykPlugin]);
+import namesPlugin from "colord/plugins/names"
+extend([cmykPlugin, namesPlugin]);
 export default function TemplateView(): ReactElement {
   const [searchText, setSearchText] = useState<string | undefined>("");
   let searchTexthex: string;
@@ -42,29 +43,29 @@ export default function TemplateView(): ReactElement {
           subtitle={"err"}
         ></List.Item>;
       }
-    } else if (searchText.length == 6) {
-      searchTexthex = searchText;
+    }
+    else if(getFormat(searchText) == "hex"){
       try {
         listitems = (
           <>
             <List.Item
-              id={convert.hex.keyword(searchTexthex).toString()}
-              title={convert.hex.keyword(searchTexthex).toString()}
-              subtitle={"name"}
-            ></List.Item>
-            <List.Item
-              id={"#" + convert.hex.rgb(searchTexthex).toString()}
-              title={"#" + convert.hex.rgb(searchTexthex).toString()}
+              id={colord(searchText).toName({closest: true}) ?? "no name available"}
+              title={colord(searchText).toName({ closest: true }) ?? "no name available"}
               subtitle={"rgb"}
             ></List.Item>
             <List.Item
-              id={convert.hex.hsl(searchTexthex).toString()}
-              title={convert.hex.hsl(searchTexthex).toString()}
+              id={colord(searchText).toRgbString()}
+              title={colord(searchText).toRgbString()}
+              subtitle={"hex"}
+            ></List.Item>
+            <List.Item
+              id={colord(searchText).toHslString()}
+              title={colord(searchText).toHslString()}
               subtitle={"hsl"}
             ></List.Item>
             <List.Item
-              id={convert.hex.cmyk(searchTexthex).toString()}
-              title={convert.hex.cmyk(searchTexthex).toString()}
+              id={colord(searchText).toCmykString()}
+              title={colord(searchText).toCmykString()}
               subtitle={"cmyk"}
             ></List.Item>
           </>
@@ -75,7 +76,6 @@ export default function TemplateView(): ReactElement {
           title={"Please enter a valid color"}
           subtitle={"err"}
         ></List.Item>;
-        console.log("h");
       }
     }
   }

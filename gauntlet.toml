@@ -1,0 +1,18 @@
+[gauntlet]
+name = 'Color Converter'
+description = """
+Convert colors to and from anything
+"""
+
+[[entrypoint]]
+id = 'template-view'
+name = 'Color Converter'
+path = 'src/template-view.tsx'
+type = 'view'
+description = """
+Template Plugin Entrypoint Description
+"""
+
+[permissions]
+main_search_bar = ["read"]
+clipboard = ["write"]

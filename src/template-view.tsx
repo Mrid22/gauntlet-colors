@@ -3,18 +3,56 @@ import { List, Action, ActionPanel } from "@project-gauntlet/api/components";
 import { Clipboard, showHud } from "@project-gauntlet/api/helpers";
 import { colord, getFormat, extend } from "colord";
 import cmykPlugin from "colord/plugins/cmyk";
-import namesPlugin from "colord/plugins/names"
+import namesPlugin from "colord/plugins/names";
 extend([cmykPlugin, namesPlugin]);
 export default function TemplateView(): ReactElement {
   const [searchText, setSearchText] = useState<string | undefined>("");
   let listitems = null;
   if (searchText) {
-    let listItemName = <List.Item id={colord(searchText).toName({ closest: true }) ?? "no name available"} title={colord(searchText).toName({ closest: true }) ?? "no name available"} subtitle={"name"}></List.Item>
-    let listItemHex = <List.Item id={colord(searchText).toHex()} title={colord(searchText).toHex()} subtitle={"hex"}></List.Item>
-    let listItemRgb = <List.Item id={colord(searchText).toRgbString()} title={colord(searchText).toRgbString()} subtitle={"rgb"}></List.Item>
-    let listItemHsl = <List.Item id={colord(searchText).toHslString()} title={colord(searchText).toHslString()} subtitle={"hsl"}></List.Item>
-    let listItemCmyk = <List.Item id={colord(searchText).toCmykString()} title={colord(searchText).toCmykString()} subtitle={"cmyk"}></List.Item>
-    let listItemErr = <List.Item id={"err"} title={"Please enter a valid color"} subtitle={"err"}></List.Item>;
+    let listItemName = (
+      <List.Item
+        id={colord(searchText).toName({ closest: true }) ?? "no name available"}
+        title={
+          colord(searchText).toName({ closest: true }) ?? "no name available"
+        }
+        subtitle={"name"}
+      ></List.Item>
+    );
+    let listItemHex = (
+      <List.Item
+        id={colord(searchText).toHex()}
+        title={colord(searchText).toHex()}
+        subtitle={"hex"}
+      ></List.Item>
+    );
+    let listItemRgb = (
+      <List.Item
+        id={colord(searchText).toRgbString()}
+        title={colord(searchText).toRgbString()}
+        subtitle={"rgb"}
+      ></List.Item>
+    );
+    let listItemHsl = (
+      <List.Item
+        id={colord(searchText).toHslString()}
+        title={colord(searchText).toHslString()}
+        subtitle={"hsl"}
+      ></List.Item>
+    );
+    let listItemCmyk = (
+      <List.Item
+        id={colord(searchText).toCmykString()}
+        title={colord(searchText).toCmykString()}
+        subtitle={"cmyk"}
+      ></List.Item>
+    );
+    let listItemErr = (
+      <List.Item
+        id={"err"}
+        title={"Please enter a valid color"}
+        subtitle={"err"}
+      ></List.Item>
+    );
     if (getFormat(searchText) == "name") {
       try {
         listitems = (
@@ -26,10 +64,11 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        { listItemErr }
+        {
+          listItemErr;
+        }
       }
-    }
-    else if (getFormat(searchText) == "hex") {
+    } else if (getFormat(searchText) == "hex") {
       try {
         listitems = (
           <>
@@ -40,10 +79,11 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        { listItemErr }
+        {
+          listItemErr;
+        }
       }
-    }
-    else if (getFormat(searchText) == "rgb") {
+    } else if (getFormat(searchText) == "rgb") {
       try {
         listitems = (
           <>
@@ -54,7 +94,9 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        { listItemErr }
+        {
+          listItemErr;
+        }
       }
     } else if (getFormat(searchText) == "hsl") {
       try {
@@ -67,9 +109,11 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        { listItemErr }
+        {
+          listItemErr;
+        }
       }
-    }else if (getFormat(searchText) == "cmyk") {
+    } else if (getFormat(searchText) == "cmyk") {
       try {
         listitems = (
           <>
@@ -80,7 +124,9 @@ export default function TemplateView(): ReactElement {
           </>
         );
       } catch (error) {
-        { listItemErr }
+        {
+          listItemErr;
+        }
       }
     }
   }

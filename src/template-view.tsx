@@ -69,6 +69,19 @@ export default function TemplateView(): ReactElement {
       } catch (error) {
         { listItemErr }
       }
+    }else if (getFormat(searchText) == "cmyk") {
+      try {
+        listitems = (
+          <>
+            {listItemName}
+            {listItemHex}
+            {listItemRgb}
+            {listItemHsl}
+          </>
+        );
+      } catch (error) {
+        { listItemErr }
+      }
     }
   }
   return (
@@ -78,7 +91,6 @@ export default function TemplateView(): ReactElement {
           <Action
             label={`Copy color to clipboard`}
             onAction={async (id: string | undefined) => {
-              console.log(id);
               if (typeof id === "string") {
                 await Clipboard.writeText(id);
                 showHud(`"${id}" copied to clipboard`);

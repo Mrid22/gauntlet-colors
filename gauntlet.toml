@@ -1,7 +1,7 @@
 [gauntlet]
 name = 'Color Converter'
 description = """
-Template Plugin Description
+Convert colors to and from anything
 """
 
 [[entrypoint]]

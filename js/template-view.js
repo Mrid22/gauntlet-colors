@@ -9,12 +9,12 @@ function TemplateView() {
     const [searchText, setSearchText] = useState("");
     let listitems = null;
     if (searchText) {
-        let listItemName = jsx(List.Item, { id: w(searchText).toName({ closest: true }) ?? "no name available", title: w(searchText).toName({ closest: true }) ?? "no name available", subtitle: "name" });
-        let listItemHex = jsx(List.Item, { id: w(searchText).toHex(), title: w(searchText).toHex(), subtitle: "hex" });
-        let listItemRgb = jsx(List.Item, { id: w(searchText).toRgbString(), title: w(searchText).toRgbString(), subtitle: "rgb" });
-        let listItemHsl = jsx(List.Item, { id: w(searchText).toHslString(), title: w(searchText).toHslString(), subtitle: "hsl" });
-        let listItemCmyk = jsx(List.Item, { id: w(searchText).toCmykString(), title: w(searchText).toCmykString(), subtitle: "cmyk" });
-        jsx(List.Item, { id: "err", title: "Please enter a valid color", subtitle: "err" });
+        let listItemName = (jsx(List.Item, { id: w(searchText).toName({ closest: true }) ?? "no name available", title: w(searchText).toName({ closest: true }) ?? "no name available", subtitle: "name" }));
+        let listItemHex = (jsx(List.Item, { id: w(searchText).toHex(), title: w(searchText).toHex(), subtitle: "hex" }));
+        let listItemRgb = (jsx(List.Item, { id: w(searchText).toRgbString(), title: w(searchText).toRgbString(), subtitle: "rgb" }));
+        let listItemHsl = (jsx(List.Item, { id: w(searchText).toHslString(), title: w(searchText).toHslString(), subtitle: "hsl" }));
+        let listItemCmyk = (jsx(List.Item, { id: w(searchText).toCmykString(), title: w(searchText).toCmykString(), subtitle: "cmyk" }));
+        (jsx(List.Item, { id: "err", title: "Please enter a valid color", subtitle: "err" }));
         if (I(searchText) == "name") {
             try {
                 listitems = (jsxs(Fragment, { children: [listItemHex, listItemRgb, listItemHsl, listItemCmyk] }));

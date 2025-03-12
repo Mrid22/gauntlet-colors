@@ -41,8 +41,8 @@ export default function TemplateView(): ReactElement {
     );
     let listItemCmyk = (
       <List.Item
-        id={colord(searchText).toCmykString()}
-        title={colord(searchText).toCmykString()}
+        id={colord(searchText).toCmykString().replace("device-cmyk","cmyk")}
+        title={colord(searchText).toCmykString().replace("device-cmyk","cmyk")}
         subtitle={"cmyk"}
       ></List.Item>
     );

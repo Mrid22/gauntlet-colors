@@ -13,6 +13,27 @@ description = """
 Template Plugin Entrypoint Description
 """
 
+[[preferences]]
+id = 'rgb'
+name = 'RGB'
+type = 'bool'
+default = true
+description = "Wether or not to show rgb in results"
+
+[[preferences]]
+id = 'hex'
+name = 'Hex'
+type = 'bool'
+default = true
+description = "Wether or not to show hex in results"
+
+[[preferences]]
+id = 'hsl'
+name = 'Hsl'
+type = 'bool'
+default = true
+description = "Wether or not to show hsl in results"
+
 [permissions]
 main_search_bar = ["read"]
 clipboard = ["write"]

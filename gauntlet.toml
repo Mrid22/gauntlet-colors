@@ -10,29 +10,31 @@ name = 'Color Converter'
 path = 'src/template-view.tsx'
 type = 'view'
 description = """
-Template Plugin Entrypoint Description
+Shows results in all formats
 """
 
-[[preferences]]
-id = 'rgb'
-name = 'RGB'
-type = 'bool'
-default = true
-description = "Wether or not to show rgb in results"
+[[entrypoint]]
+id = 'inline-view'
+name = 'Color Converter'
+path = 'src/inline-view.tsx'
+type = 'inline-view'
+description = """
+Show result in your favorite format
+"""
 
-[[preferences]]
-id = 'hex'
-name = 'Hex'
-type = 'bool'
-default = true
-description = "Wether or not to show hex in results"
-
-[[preferences]]
-id = 'hsl'
-name = 'Hsl'
-type = 'bool'
-default = true
-description = "Wether or not to show hsl in results"
+[[entrypoint.preferences]]
+id = "bundleNameLang"
+name = "Inline Conversion"
+type = "enum"
+default = "hex"
+description = "Which conversion to show in inline view"
+enum_values = [
+    { label = 'Name', value = 'name' },
+    { label = 'Hex', value = 'hex' },
+    { label = 'Rgb', value = 'rgb' },
+    { label = 'Hsl', value = 'hsl' },
+    { label = 'Cmyk', value = 'Cmyk' },
+]
 
 [permissions]
 main_search_bar = ["read"]

@@ -41,8 +41,8 @@ export default function TemplateView(): ReactElement {
     );
     let listItemCmyk = (
       <List.Item
-        id={colord(searchText).toCmykString().replace("device-cmyk","cmyk")}
-        title={colord(searchText).toCmykString().replace("device-cmyk","cmyk")}
+        id={colord(searchText).toCmykString().replace("device-cmyk", "cmyk")}
+        title={colord(searchText).toCmykString().replace("device-cmyk", "cmyk")}
         subtitle={"cmyk"}
       ></List.Item>
     );
@@ -53,7 +53,8 @@ export default function TemplateView(): ReactElement {
         subtitle={"err"}
       ></List.Item>
     );
-    if (getFormat(searchText) == "name") {
+    if (getFormat(se
+      archText) == "name") {
       try {
         listitems = (
           <>
